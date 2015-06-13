@@ -7,7 +7,7 @@ pathsRead = fedit(paths,
                   title="Interleave pdf",
                   comment="Enter the full path to the source pdf and a path to output the result."
                   )
-# Full path to files should be specified eg C:\Users\Sam\Documents\Input.pdf and C:\Users\Sam\Documents\Input.pdf
+# Full path to files should be specified eg C:\Users\Sam\Documents\Input.pdf and C:\Users\Sam\Documents\Output.pdf
 
 document = PyPDF2.PdfFileReader(pathsRead[0])
 writer = PyPDF2.PdfFileWriter()
