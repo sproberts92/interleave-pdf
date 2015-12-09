@@ -4,8 +4,9 @@ import tkinter.filedialog as fd
 
 class Application(tk.Frame):
 	def __init__(self, master=None):
-		self.input_path = None;
-		self.output_path = None;
+		tk.Tk()
+		self.input_path = tk.StringVar();
+		self.output_path = tk.StringVar();
 
 		tk.Frame.__init__(self, master)
 
@@ -18,7 +19,6 @@ class Application(tk.Frame):
 
 		self.entry_in = tk.Entry(self, width=50, textvariable=self.input_path)
 		self.entry_in.grid(row=0, column=1)
-		self.entry_in.insert("end","Path...")
 
 		self.button = tk.Button(self, text="Browse", command=self.load_file, width=12)
 		self.button.grid(row=0, column=2)
@@ -28,8 +28,7 @@ class Application(tk.Frame):
 
 		self.entry_out = tk.Entry(self, width=50, textvariable=self.output_path)
 		self.entry_out.grid(row=1, column=1)
-		self.entry_out.insert("end","Path...")
-		
+
 		self.button = tk.Button(self, text="Browse", command=self.save_file, width=12)
 		self.button.grid(row=1, column=2)
 
@@ -37,14 +36,12 @@ class Application(tk.Frame):
 		self.button.grid(row=2, column=2)
 
 	def load_file(self):
-		self.input_path = fd.askopenfilename(filetypes=(("Adobe PDF Files", "*.pdf"), ("All files", "*.*")))
-		self.entry_in.delete(0, "end")
-		self.entry_in.insert("end",self.input_path)
-		
+		path = fd.askopenfilename(filetypes=(("Adobe PDF Files", "*.pdf"), ("All files", "*.*")))
+		self.input_path.set(path)
+
 	def save_file(self):
-		self.output_path = fd.asksaveasfilename(filetypes=(("Adobe PDF Files", "*.pdf"), ("All files", "*.*")))
-		self.entry_out.delete(0, "end")
-		self.entry_out.insert("end",self.output_path)
+		path = fd.asksaveasfilename(filetypes=(("Adobe PDF Files", "*.pdf"), ("All files", "*.*")))
+		self.output_path.set(path)
 
 	def interleave(self):
 		self.input_path = self.entry_in.get()
@@ -60,7 +57,7 @@ class Application(tk.Frame):
 
 			outputStream = open(self.output_path, 'wb')
 			writer.write(outputStream)
-			outputStream.close()		
+			outputStream.close()
 
 if __name__ == "__main__":
 	Application().mainloop()
