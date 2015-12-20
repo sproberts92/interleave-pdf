@@ -5,7 +5,8 @@ import tkinter.filedialog as fd
 
 class Application(tk.Frame):
 	def __init__(self, master=None):
-		tk.Tk()
+		root = tk.Tk()
+		root.iconbitmap('icon\\interleave-pdf.ico')
 
 		self.input_path = tk.StringVar();
 		self.output_path = tk.StringVar();
